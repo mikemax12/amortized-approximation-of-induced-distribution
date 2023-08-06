@@ -4,7 +4,7 @@ os.environ["CUDA_VISIBLE_DEVICES"]="0"
 import argparse
 import torch
 from torchvision import datasets, transforms
-from src.utils.model_zoo import mnist_mlp
+from model_zoo import mnist_mlp
 import torch.nn.functional as F
 from pysgmcmc.optimizers.sgld import SGLD
 
