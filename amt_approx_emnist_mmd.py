@@ -464,7 +464,7 @@ def main():
                 samples_a_round = []
                 for data, target in test_loader:
                     data = data.to(device)
-                    output = F.softmax(model(data))
+                    output = F.softmax(model(data), dim=X)
                     samples_a_round.append(output)
                 samples_a_round = torch.cat(samples_a_round).cpu()
                 all_samples.append(samples_a_round)
@@ -482,7 +482,7 @@ def main():
                 samples_a_round = []
                 for data, target in ood_loader:
                     data = data.to(device)
-                    output = F.softmax(model(data))
+                    output = F.softmax(model(data), dim=X)
                     samples_a_round.append(output)
                 samples_a_round = torch.cat(samples_a_round).cpu()
                 all_samples.append(samples_a_round)
