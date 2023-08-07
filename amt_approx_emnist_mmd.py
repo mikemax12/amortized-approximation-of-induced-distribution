@@ -159,7 +159,8 @@ def train_approx(args, fmodel, gmodel, device, approx_loader, f_optimizer, g_opt
             print('Train Epoch: {}, Loss: {:.6f}'.format(
                 epoch, loss.item()))
 
-#EVALUATION CODE:
+#EVALUATION CODE: Only Measure uncertainty to distinguish between ID and ODD, does not already know labels, evaluates on
+#test set and OOD set and sees through AUROC and AUPR whether it discriminates properly
 '''The provided code is evaluating the performance of a model on out-of-distribution (OOD) data and assessing its ability to 
 distinguish between in-distribution (ID) and OOD samples using various uncertainty metrics. The metrics such as AUROC 
 (Area Under the Receiver Operating Characteristic curve) and AUPR (Area Under the Precision-Recall curve) are used to 
