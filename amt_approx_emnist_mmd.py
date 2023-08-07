@@ -109,8 +109,21 @@ def train_approx(args, fmodel, gmodel, device, approx_loader, f_optimizer, g_opt
 
         pi = f_out.mul(g_out)
 
+
+        '''Instead of directly working with the entire Dirichlet distribution, the code is taking samples from the Dirichlet 
+        distribution to calculate the loss. This approach is known as Monte Carlo sampling.
+        The Dirichlet distribution represents a family of probability distributions over a simplex (a geometric shape 
+        that generalizes a triangle to higher dimensions) with K dimensions (K being the number of classes or categories). 
+        Each sample from the Dirichlet distribution corresponds to a probability vector (π) of length K, where each component
+        represents the probability of an item belonging to a specific class.'''
+        
         s1 = torch.distributions.Dirichlet(pi).rsample((num_samples,)).permute(1,0,2)
 
+        #MMD usage:
+        '''The MMD (Maximum Mean Discrepancy) and polynomial functions are likely used to compare the distribution of class 
+        probabilities from the model's output (output) with the sampled distribution (s1). The loss function aims to minimize 
+        the discrepancy between these distributions, helping the model better capture the uncertainty and predictive behavior 
+        of the Dirichlet distribution.'''
         loss = (batch_mmd(output, s1, num_samples, 1e5)
                 + 0.5*polynomial(output, s1, num_samples, 1, 3)
                 + 0.5*polynomial(output, s1, num_samples, 1, 4)).mean()
