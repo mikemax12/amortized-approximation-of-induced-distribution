@@ -1,3 +1,9 @@
+'''Maximum Mean Discrepancy (MMD):
+MMD is a kernel-based distance metric used to compare two sets of samples or probability distributions. 
+It quantifies the distance between the means of the distributions in a high-dimensional feature space induced by a kernel function. 
+The MMD metric can be used to determine if two sets of samples are drawn from the same distribution or to compare the similarity of
+two probability distributions. MMD has been commonly used in various machine learning tasks, 
+such as domain adaptation, generative model evaluation, and two-sample testing.'''
 import sys
 from pathlib import Path
 home = str(Path.home())
