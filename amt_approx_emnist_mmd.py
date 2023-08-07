@@ -83,7 +83,12 @@ def batch_mmd(x, y, B, alpha):
     gamma = (2. / (B * B))
 
     return beta * (torch.sum(K, [1,2]) + torch.sum(L, [1,2])) - gamma * torch.sum(P, [1,2])
-
+    
+'''Here is the student model that approximates the teacher distribution by using the less expensive Dirichlet distribution.
+The reason the student model is not intractable and can be more computationally efficient compared to the teacher model is because
+it uses the Dirichlet distribution as its parametric distribution. In the OPU (One-Pass Uncertainty) framework with the student model, 
+there is no need for additional sampling during inference. The student model directly provides class probabilities as its 
+output, and these class probabilities can be used to obtain the level of uncertainty in its predictions.'''
 def train_approx(args, fmodel, gmodel, device, approx_loader, f_optimizer, g_optimizer, output_samples, epoch):
     gmodel.train()
     fmodel.train()
@@ -162,6 +167,7 @@ def eval_approx(args,  smean, sconc, device, test_loader,
     gvalue_approx_1 = []
     gvalue_approx_2 = []
     batch_idx = 0
+    #This is evaluation on test loader
     with torch.no_grad():
         for data, target in test_loader:
 
@@ -231,6 +237,7 @@ def eval_approx(args,  smean, sconc, device, test_loader,
     print('approx ACC :', correct_approx / (len(test_loader.dataset)))
     print('ensemble ACC :', correct_ensemble / (len(test_loader.dataset)))
 
+    #This is the evaluation on the OOD loader
     with torch.no_grad():
         for batch_idx, (data, target) in enumerate(ood_loader):
             data, target = data.to(device), target.to(device)
