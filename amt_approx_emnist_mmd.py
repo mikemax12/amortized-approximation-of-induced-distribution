@@ -120,10 +120,9 @@ def train_approx(args, fmodel, gmodel, device, approx_loader, f_optimizer, g_opt
         s1 = torch.distributions.Dirichlet(pi).rsample((num_samples,)).permute(1,0,2)
 
         #MMD usage:
-        '''The MMD (Maximum Mean Discrepancy) and polynomial functions are likely used to compare the distribution of class 
+        '''The MMD (Maximum Mean Discrepancy) and polynomial functions are used to compare the distribution of class 
         probabilities from the model's output (output) with the sampled distribution (s1). The loss function aims to minimize 
-        the discrepancy between these distributions, helping the model better capture the uncertainty and predictive behavior 
-        of the Dirichlet distribution.'''
+        the discrepancy between these distributions.'''
         loss = (batch_mmd(output, s1, num_samples, 1e5)
                 + 0.5*polynomial(output, s1, num_samples, 1, 3)
                 + 0.5*polynomial(output, s1, num_samples, 1, 4)).mean()
