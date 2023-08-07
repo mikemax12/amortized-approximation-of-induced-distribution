@@ -224,11 +224,14 @@ def eval_approx(args,  smean, sconc, device, test_loader,
     correct_approx = np.sum(1-miscls_approx)
     correct_ensemble = np.sum(1-miscls_origin)
 
+    ## Calculate and print the AUROC (Area Under the Receiver Operating Characteristic) scores for different metrics
     print("AUROC (entros_origin_1): ", roc_auc_score(miscls_origin, entros_origin_1))
     print("AUROC (fentros_approx_1): ", roc_auc_score(miscls_approx, fentros_approx_1))
     print("AUROC (maxp_approx_1):   ", roc_auc_score(miscls_approx, maxp_approx_1))
     print("AUROC (maxp_origin_1):   ", roc_auc_score(miscls_origin, maxp_origin_1))
     print("AUROC (gvalue_approx_1): ", roc_auc_score(miscls_approx, gvalue_approx_1))
+
+    # Calculate and print the AUPR (Area Under the Precision-Recall) scores for different metrics
     print("AUPR  (entros_origin_1): ", average_precision_score(miscls_origin, entros_origin_1))
     print("AUPR  (fentros_approx_1): ", average_precision_score(miscls_approx, fentros_approx_1))
     print("AUPR  (maxp_approx_1):   ", average_precision_score(miscls_approx, maxp_approx_1))
