@@ -159,6 +159,37 @@ def train_approx(args, fmodel, gmodel, device, approx_loader, f_optimizer, g_opt
             print('Train Epoch: {}, Loss: {:.6f}'.format(
                 epoch, loss.item()))
 
+#EVALUATION CODE:
+'''The provided code is evaluating the performance of a model on out-of-distribution (OOD) data and assessing its ability to 
+distinguish between in-distribution (ID) and OOD samples using various uncertainty metrics. The metrics such as AUROC 
+(Area Under the Receiver Operating Characteristic curve) and AUPR (Area Under the Precision-Recall curve) are used to 
+quantify how well the model can distinguish between the two categories:
+
+1. The code concatenates the values of uncertainty metrics (`entros_origin_2`, `fentros_approx_2`, etc.) obtained for 
+out-of-distribution data (`ood_loader`) with the metrics obtained for in-distribution data (`test_loader`).
+
+2. A binary label array `ood` is created, where zeros represent in-distribution samples, and ones represent out-of-distribution samples.
+
+3. The AUROC and AUPR scores are calculated for each uncertainty metric using the `roc_auc_score` and `average_precision_score` 
+functions. These metrics quantify the model's ability to differentiate between in-distribution and out-of-distribution samples based 
+on the uncertainty values.
+
+4. AUROC Calculation: The AUROC score is calculated by plotting the Receiver Operating Characteristic curve. The ROC curve is 
+created by varying the threshold for classifying samples as positive or negative. For each threshold, the true positive rate 
+(TPR) and false positive rate (FPR) are calculated. The AUROC score is then calculated as the area under this curve. 
+It represents the model's ability to discriminate between the two classes across various threshold values.
+AUPR Calculation: The AUPR score is calculated by plotting the Precision-Recall curve. The precision and recall are calculated for 
+different threshold values. Precision is the ratio of true positives to the total predicted positives, while recall is the ratio of 
+true positives to the total actual positives. The AUPR score is the area under this curve, representing how well the model ranks the 
+positive class samples with respect to the negative class samples.
+
+5. The calculated AUROC and AUPR scores are printed for each uncertainty metric, providing insights into how well the model performs 
+at identifying OOD data. Higher AUROC and AUPR scores indicate better discrimination between in-distribution and OOD data.
+The code essentially evaluates the model's robustness against OOD samples by analyzing how well it captures uncertainty patterns
+that differentiate between the two types of data. If the AUROC and AUPR scores are high, it suggests that the model's uncertainty
+metrics are effective in distinguishing between in-distribution and OOD samples'''
+
+
 def eval_approx(args,  smean, sconc, device, test_loader,
                 ood_loader, teacher_test_samples, teacher_ood_samples):
 
