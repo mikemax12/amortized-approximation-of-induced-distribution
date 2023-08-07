@@ -3,7 +3,7 @@ from pathlib import Path
 home = str(Path.home())
 sys.path.append(home+'/projects/amt_approx_simplex')
 import torch.utils.data as tud
-from model_zoo import mnist_net
+from model_zoo import mnist_net #they use mnist_net as their underlying model
 import torch.nn.functional as F
 from torchvision import datasets, transforms
 import argparse
