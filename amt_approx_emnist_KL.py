@@ -5,7 +5,7 @@ sys.path.append(home+'/projects/amt_approx_simplex')
 # import os
 # os.environ["CUDA_VISIBLE_DEVICES"]="0"
 import torch
-from src.utils.model_zoo import mnist_net, mnist_net_f, mnist_net_g
+from model_zoo import mnist_net, mnist_net_f, mnist_net_g
 import torch.optim as optim
 import torch.nn.functional as F
 from torchvision import datasets, transforms
