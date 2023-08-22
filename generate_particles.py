@@ -55,7 +55,7 @@ trainset_class6to10 = Subset(tr_data, train_indices_class6to10)
 
 ood_data = trainset_class6to10
 
-ood_dataloader = torch.utils.data.DataLoader(ood_data, batch_size=256, shuffle=False, num_workers=8)
+ood_loader = torch.utils.data.DataLoader(ood_data, batch_size=256, shuffle=False, num_workers=8)
 
 print('==> Building model..')
 net = VGG('VGG19', dropout=0.1)
