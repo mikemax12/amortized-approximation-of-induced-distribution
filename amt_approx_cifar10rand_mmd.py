@@ -363,6 +363,9 @@ def main():
     tr_data = CIFAR10(root='data', train=True, download=True, transform=transform_train)
 
     te_data = CIFAR10(root='data', train=False, download=True, transform=transform_test)
+
+    full_trainset = tr_data
+    full_testset = te_data
     
     test_indices_class1to5 = [i for i in range(len(full_testset)) if full_testset.targets[i] < 5]
     testset_class1to5 = Subset(te_data, test_indices_class1to5)
