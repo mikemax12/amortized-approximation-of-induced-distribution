@@ -31,9 +31,9 @@ transform_test = transforms.Compose([
     trans_norm,
 ])
 
-tr_data = CIFAR10(root='../../data', train=True, download=True, transform=transform_train)
+tr_data = CIFAR10(root='data', train=True, download=True, transform=transform_train)
 
-te_data = CIFAR10(root='../../data', train=False, download=True, transform=transform_test)
+te_data = CIFAR10(root='data', train=False, download=True, transform=transform_test)
 
 full_trainset = tr_data
 full_testset = te_data
