@@ -8,6 +8,7 @@ from sklearn.metrics import roc_auc_score, average_precision_score
 from torchvision.datasets import CIFAR10, LSUN
 import numpy as np
 import matplotlib.pyplot as plt
+from torch.utils.data import DataLoader, Subset
 
 num_samples = 300
 
