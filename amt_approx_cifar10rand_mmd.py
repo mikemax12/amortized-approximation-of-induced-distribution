@@ -360,9 +360,9 @@ def main():
         trans_norm,
     ])
 
-    tr_data = CIFAR10(root='../../data', train=True, download=True, transform=transform_train)
+    tr_data = CIFAR10(root='data', train=True, download=True, transform=transform_train)
 
-    te_data = CIFAR10(root='../../data', train=False, download=True, transform=transform_test)
+    te_data = CIFAR10(root='data', train=False, download=True, transform=transform_test)
     
     test_indices_class1to5 = [i for i in range(len(full_testset)) if full_testset.targets[i] < 5]
     testset_class1to5 = Subset(te_data, test_indices_class1to5)
@@ -391,7 +391,7 @@ def main():
 
     model = VGG('VGG19').to(device)
 
-    model.load_state_dict(torch.load('checkpoint/ckpt.pth')['net'])
+    model.load_state_dict(torch.load('cifar10_5classesckpt.pth')['net'])
 
     test(args, model, device, test_loader)
 
