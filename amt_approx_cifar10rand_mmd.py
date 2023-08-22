@@ -1,5 +1,5 @@
 import torch
-from utils.vgg import *
+from vgg import *
 import torch.optim as optim
 import torch.nn.functional as F
 from torchvision import datasets, transforms
