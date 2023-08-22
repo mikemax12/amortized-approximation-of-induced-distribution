@@ -9,7 +9,7 @@ from torchvision.datasets import CIFAR10, LSUN
 import numpy as np
 import matplotlib.pyplot as plt
 
-num_samples = 400
+num_samples = 300
 
 def test(args, model, device, test_loader):
     model.eval()
