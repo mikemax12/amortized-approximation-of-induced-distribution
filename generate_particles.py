@@ -43,7 +43,7 @@ trainset_class1to5 = Subset(full_trainset, train_indices_class1to5)
 
 train_loader = torch.utils.data.DataLoader(trainset_class1to5, batch_size=512, shuffle=True, num_workers=8)
 
-testset = torchvision.datasets.CIFAR10(root='../../data', train=False, download=True, transform=transform_test)
+testset = torchvision.datasets.CIFAR10(root='data', train=False, download=True, transform=transform_test)
 
 test_indices_class1to5 = [i for i in range(len(full_testset)) if full_testset.targets[i] < 5]
 testset_class1to5 = Subset(testset, test_indices_class1to5)
