@@ -323,7 +323,9 @@ def main():
                         help='name of the used ood dataset')
 
     args = parser.parse_args()
-    use_cuda = not args.no_cuda and torch.cuda.is_available()
+    
+    use_cuda = True #not args.no_cuda and torch.cuda.is_available()
+    import torch
 
     torch.manual_seed(args.seed)
 
