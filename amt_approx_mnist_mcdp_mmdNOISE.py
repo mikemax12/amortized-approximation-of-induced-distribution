@@ -4,7 +4,7 @@ from pathlib import Path
 home = str(Path.home())
 sys.path.append(home+'/projects/amt_approx_simplex')
 import torch
-from src.utils.model_zoo import mnist_mlp, mnist_mlp_h, mnist_mlp_g
+from model_zoo import mnist_mlp, mnist_mlp_h, mnist_mlp_g
 import torch.optim as optim
 from torch.distributions import dirichlet
 import torch.nn.functional as F
