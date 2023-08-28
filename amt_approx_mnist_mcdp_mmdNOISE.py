@@ -148,9 +148,10 @@ def eval_approx(args,  smean, sconc, device, test_loader,
     batch_idx = 0
     with torch.no_grad():
         for data, target in test_loader:
-
             data, target = data.to(device), target.to(device)
             data = data.view(data.shape[0], -1)
+            if batch_idx == 0:
+                print(data, target)
 
             g_out = F.softplus(sconc(data))
             f_out = F.softmax(smean(data), dim=1)
@@ -218,9 +219,12 @@ def eval_approx(args,  smean, sconc, device, test_loader,
 
     with torch.no_grad():
         for batch_idx, (data, target) in enumerate(ood_loader):
+            
             data, target = data.to(device), target.to(device)
             data = data.view(data.shape[0], -1)
             data = data.to(torch.float32)
+            if batch_idx == 0:
+                print(data, target)
             g_out = F.softplus(sconc(data))
             f_out = F.softmax(smean(data), dim=1)
             pi_q = f_out.mul(g_out)
