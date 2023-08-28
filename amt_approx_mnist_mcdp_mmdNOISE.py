@@ -295,7 +295,7 @@ def main():
                         help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default=64, metavar='N',
                         help='input batch size for testing (default: 1000)')
-    parser.add_argument('--approx-epochs', type=int, default=200, metavar='N',
+    parser.add_argument('--approx-epochs', type=int, default=100, metavar='N',
                         help='number of epochs to approx (default: 10)')
     parser.add_argument('--lr', type=float, default=1e-2, metavar='LR',
                         help='learning rate (default: 0.0005)')
