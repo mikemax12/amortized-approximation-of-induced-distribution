@@ -399,6 +399,24 @@ def main():
         ood_data,
         batch_size=args.batch_size, shuffle=False, **kwargs)
 
+    mmd_values = []
+
+    # Iterate through batches of train data and OOD data
+    for batch_train, batch_ood in zip(train_loader, ood_loader):
+        # Assuming batch_train and batch_ood have image data
+        x_train = batch_train['image']  # Adjust the key if needed
+        x_ood = batch_ood['image']      # Adjust the key if needed
+    
+        # Calculate the MMD
+        mmd = batch_mmd(x_train, x_ood, B=len(x_train), alpha=0.1)
+        mmd_values.append(mmd.item())
+    
+    # Calculate the average MMD value
+    average_mmd = sum(mmd_values) / len(mmd_values)
+    
+    print("Average MMD between train and OOD data:", average_mmd)
+
+
     model = mnist_mlp().to(device)
 
     model.load_state_dict(torch.load(args.model_path + 'mcdp-mnist.pt'))
