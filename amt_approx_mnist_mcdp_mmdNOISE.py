@@ -218,7 +218,7 @@ def eval_approx(args,  smean, sconc, device, test_loader,
 
 
     with torch.no_grad():
-        for batch_idx, (data, target) in enumerate(ood_loader):
+        for batch_idx, (data) in enumerate(ood_loader):
             
             data, target = data.to(device), target.to(device)
             data = data.view(data.shape[0], -1)
@@ -343,7 +343,7 @@ def main():
         transforms.ToTensor(),
         transforms.Normalize((0.5,), (0.5,))]), download=True)
 
-    if args.ood_name == 'omniglot':
+    '''if args.ood_name == 'omniglot':
         ood_data = datasets.Omniglot('../data', download=True, transform=transforms.Compose([
             transforms.Resize((28, 28)),
             transforms.ToTensor(),
@@ -354,7 +354,7 @@ def main():
             transforms.Resize((28, 28)),
             transforms.ToTensor(),
             transforms.Normalize((0.5,), (0.5,)),
-        ]))
+        ]))'''
 
     import numpy as np
     import scipy.io
@@ -511,7 +511,7 @@ def main():
             all_samples = []
             for i in range(500):
                 samples_a_round = []
-                for data, target in ood_loader:
+                for data in ood_loader:
                     data = data.to(device)
                     data = data.view(data.shape[0], -1)
                     data = data.to(torch.float32)
