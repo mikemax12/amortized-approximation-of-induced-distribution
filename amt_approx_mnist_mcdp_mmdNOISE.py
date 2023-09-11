@@ -381,12 +381,39 @@ def main():
             return image, label
 
     # Load n-MNIST datasets from .mat files
-    data = scipy.io.loadmat('mnist-with-motion-blur.mat')
+    #data = scipy.io.loadmat('mnist-with-motion-blur.mat')
     #print(data)
 
-    ood_data = CustomDataset(data=data)
+    #ood_data = CustomDataset(data=data)
 
-
+    import torch
+    import numpy as np
+    
+    # Function to generate random noise
+    def generate_noise(noise_shape, magnitude=0.2):
+        return torch.randn(noise_shape) * magnitude
+    
+    # Create a custom data loader for the random noise
+    class NoiseDataset(torch.utils.data.Dataset):
+        def __init__(self, num_samples, noise_shape, magnitude=0.2):
+            self.num_samples = num_samples
+            self.noise_shape = noise_shape
+            self.magnitude = magnitude
+    
+        def __len__(self):
+            return self.num_samples
+    
+        def __getitem__(self, idx):
+            noise = generate_noise(self.noise_shape, self.magnitude)
+            return noise
+    
+    # Example usage
+    num_samples = len(mnist_dataset)  # You can adjust this based on your needs
+    noise_shape = (1, 28, 28)  # Adjust the shape to match your data
+    magnitude = 0.2  # Adjust the noise magnitude as needed
+    
+    ood_data = NoiseDataset(num_samples, noise_shape, magnitude)
+    
     train_loader = torch.utils.data.DataLoader(
         tr_data,
         batch_size=args.batch_size, shuffle=False, **kwargs)
@@ -401,7 +428,7 @@ def main():
 
     mmd_values = []
 
-    # Iterate through batches of train data and OOD data
+    '''# Iterate through batches of train data and OOD data
     for batch_train, batch_ood in zip(train_loader, ood_loader):
         # Assuming batch_train and batch_ood have image data
         x_train = batch_train['image']  # Adjust the key if needed
@@ -414,7 +441,7 @@ def main():
     # Calculate the average MMD value
     average_mmd = sum(mmd_values) / len(mmd_values)
     
-    print("Average MMD between train and OOD data:", average_mmd)
+    print("Average MMD between train and OOD data:", average_mmd)'''
 
 
     model = mnist_mlp().to(device)
