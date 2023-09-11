@@ -408,7 +408,7 @@ def main():
             return noise
     
     # Example usage
-    num_samples = len(mnist_dataset)  # You can adjust this based on your needs
+    num_samples = len(te_data)  # You can adjust this based on your needs
     noise_shape = (1, 28, 28)  # Adjust the shape to match your data
     magnitude = 0.2  # Adjust the noise magnitude as needed
     
